@@ -1,0 +1,83 @@
+import java.util.Scanner;
+import java.lang.Math; //랜덤 수 생성 메소드를 사용하기위해
+
+class Person{
+    String name; //선수이름
+}
+
+public class Game {
+	
+	public static int Numprint() { //랜덤으로 생성한 수를 출력하는 메소드
+		 int[] array=new int[3]; //랜덤수 3개를 저장할 배열
+		 int j;
+		 
+		 for(j=0;j<3;j++) {
+		         array[j]=(int)(Math.random()*3+1); //랜덤수 생성
+        		System.out.print("  " + array[j] + "  "); //숫자 출력
+		 }
+		 if(array[0]==array[1]&&array[1]==array[2]) //3개의 수가 모두 같음
+			 return 1;
+		 else
+			 return 0;
+	}
+	
+	public static int getenter() { //엔터를 입력받았을 때, 1을 리턴하는 함수
+		Scanner scanner=new Scanner(System.in);
+		String enter=scanner.nextLine(); //엔터를 기다림
+		
+		if(enter.equals("")) //엔터를 입력받을 경우
+			return 1;
+		else
+			return 0;
+	}
+	
+    public static void main(String[] args) {
+        Scanner scanner=new Scanner(System.in);
+        
+        Person p1=new Person(); //1번째 선수 객체생성
+        Person p2=new Person(); //2번째 선수 객체생성
+
+        System.out.println("1번째 선수이름>> ");
+        p1.name=scanner.next();
+        System.out.println("2번째 선수이름>> ");
+        p2.name=scanner.next();
+        
+        int a;
+        
+        do {
+        	int enter2;
+        	System.out.println(" [" + p1.name + "]:<Enter>"); //1번째 선수이름 출력
+        	enter2=getenter(); //키를 입력할 메소드 호출
+        	
+        	if(enter2==1) {  //엔터를 눌렀을 때
+        		a=Numprint();  //랜덤으로 수를 생성하고 출력할 메소드 호출
+        		
+        	if(a==1) { //3개의 수가 모두 같을 경우
+        		System.out.println(p1.name + "님이 이겼습니다!");
+        		break; //반복문 종료
+        	}
+        	else { //3개의 수가 모두 같지 않을 경우
+        		System.out.println("아쉽군요!");
+        	}
+
+        }
+        
+        	System.out.print(" [" + p2.name + "]:<Enter>"); //2번째 선수 이름 출력
+        	enter2=getenter();	
+        	
+        	if(enter2==1) {  //엔터를 눌렀을 때
+        		a=Numprint(); //랜덤으로 수를 생성하고 출력할 메소드 호출
+        		
+        	if(a==1) { //3개의 수가 모두 같을 경우
+        		System.out.println(p2.name + "님이 이겼습니다!");
+        		break; //반복문 종료
+        	}
+        	else { //3개의 수가 모두 같지 않을 경우
+        		System.out.println("아쉽군요!");
+        	}
+        }
+        	
+        }while(true);
+        
+    }
+}
