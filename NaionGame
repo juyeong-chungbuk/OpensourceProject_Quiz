@@ -1,0 +1,116 @@
+import java.util.*;
+
+class Nation{ //나라이름과 수도명을 넣을 클래스
+	String country; //나라이름
+	String capital; //수도이름
+	
+	Nation(String country, String capital){ //생성자
+		this.country=country;
+		this.capital=capital;
+	}
+	String getcountry() { //나라이름 리턴을 위해
+		return country;
+	}
+	String getcapital() { //수도이름 리턴을 위
+		return capital;
+	}
+	
+}
+
+class Game{ //게임을 시작할 클래스
+	Vector<Nation> nation=new Vector <Nation>(); //벡터 정의
+	
+	boolean contains(String country) { //이미 있는 나라인지 확인할 메소드
+		for(int i=0;i<nation.size();i++) {
+	if(nation.get(i).getcountry().equals(country)) {	
+		return true; //입력한 나라와 원래 있던 나라이름이 일치하면 true 리턴
+		}
+	}
+		return false;
+		}
+
+	public void game() { //게임 실행
+
+		Scanner scanner=new Scanner(System.in);
+		int n=0; //종료 구분을 위한 선언
+		
+		nation.add(new Nation("멕시코","멕시코시티"));
+		nation.add(new Nation("독일","베를린"));
+		nation.add(new Nation("중국","베이징"));
+		nation.add(new Nation("일본","도쿄"));
+		nation.add(new Nation("스페인","마드리드"));
+		nation.add(new Nation("프랑스","파리"));
+		nation.add(new Nation("러시아","모스크바"));
+		nation.add(new Nation("캐나다","오타와"));
+		nation.add(new Nation("영국","런던")); //각 나라와 수도를 추가해줌
+		
+		System.out.println("**** 수도 맞추기 게임을 시작합니다.****");
+		
+		while(true) { //무한루프
+		System.out.println("입력:1, 퀴즈:2, 종료:3>>");
+		int menu=scanner.nextInt(); //메뉴번호 입력
+		
+		switch(menu) {
+			case 1: //나라정보 입력
+				while(true) {
+					int num=nation.size();
+				System.out.println("현재"+num+"개 나라와 수도가 입력되어 있습니다.");
+				
+				num++; //다음 size
+				System.out.println("나라와 수도 입력"+num+">>");
+				String country=scanner.next(); //나라입력
+				
+				if(country.equals("그만"))
+					break;
+				
+				String capital=scanner.next(); //수도입력
+					
+				if(contains(country)) { //일치하는 지 확인 할 메소드 호출
+					System.out.println(country+"는 이미 있습니다.");
+					continue; //이미 있는 경우 다시 입력하도록 continue
+				}
+				
+				nation.add(new Nation(country,capital)); //나라,수도 추가
+				}
+				break;
+				
+			case 2: //퀴즈
+					for(int i=0;i<nation.size();i++) {
+						
+					Nation quiz=nation.get(i); //하나씩 접근하기 위함.
+					
+					System.out.println(quiz.getcountry()+"의 수도는? ");
+					String enter_capital=scanner.next(); //수도 맞추기
+					
+					if(enter_capital.equals("그만")) { //"그만"이 들어오면 종료
+						break;
+					}
+					if(enter_capital.equals(quiz.getcapital())) //수도명 일치 할 경우
+						System.out.println("정답!!"); //정답
+					else //불일치 할 경우
+						System.out.println("아닙니다!!"); //정답x
+					}break;
+					
+			case 3: //종료
+				n++; //n증가 시키고 종료
+				System.out.println("게임을 종료합니다.");
+				break;	
+				
+		} //switch종료
+		
+		if(n==1) //case 3으로 갔으면 종료
+			break;
+		
+	} //while 종료
+		scanner.close();
+	}
+	
+	}
+
+public class NationGame { 
+	public static void main(String[] args) { //main메소드
+		Game game=new Game(); //Game클래스 객체 생성
+		game.game(); //객체로 game메소드 실행
+	}
+
+}
