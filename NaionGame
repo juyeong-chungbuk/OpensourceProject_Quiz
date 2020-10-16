@@ -47,7 +47,7 @@ class Game{ //게임을 시작할 클래스
 		System.out.println("**** 수도 맞추기 게임을 시작합니다.****");
 		
 		while(true) { //무한루프
-		System.out.println("입력:1, 퀴즈:2, 종료:3>>");
+		System.out.print("입력:1, 퀴즈:2, 종료:3>>");
 		int menu=scanner.nextInt(); //메뉴번호 입력
 		
 		switch(menu) {
@@ -57,7 +57,7 @@ class Game{ //게임을 시작할 클래스
 				System.out.println("현재"+num+"개 나라와 수도가 입력되어 있습니다.");
 				
 				num++; //다음 size
-				System.out.println("나라와 수도 입력"+num+">>");
+				System.out.print("나라와 수도 입력"+num+">>");
 				String country=scanner.next(); //나라입력
 				
 				if(country.equals("그만"))
